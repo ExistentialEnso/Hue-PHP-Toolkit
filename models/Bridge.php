@@ -7,6 +7,8 @@ namespace hue\models;
 
 class Bridge {
   /**
+   * The display name of the bridge.
+   * 
    * @var string
    */
   protected $name;
@@ -22,11 +24,15 @@ class Bridge {
   protected $proxy_address;
 
   /**
+   * The MAC Address of the bridge.
+   * 
    * @var string
    */
   protected $mac_address;
 
   /**
+   * The (internal) IP address of the bridge.
+   * 
    * @var string
    */
   protected $ip_address;
@@ -42,16 +48,22 @@ class Bridge {
   protected $gateway_ip_address;
 
   /**
+   * Whether or not the bridge connects to your router via DHCP.
+   * 
    * @var bool
    */
   protected $is_dhcp;
 
   /**
+   * Users approved to interact with this bridge.
+   * 
    * @var array
    */
   protected $whitelist;
 
   /**
+   * The currently logged in user.
+   * 
    * @var User
    */
   protected $default_user;
@@ -204,6 +216,11 @@ class Bridge {
     return $this->default_user;
   }
 
+  /**
+   * Gets all information about the light with a given ID# including LightState.
+   * 
+   * @return \hue\models\Light
+   */
   public function getLight($id) {
     $url = "http://" . $this->getIpAddress() . "/api/" . $this->getDefaultUser()->getUsername() . "/lights/" . $id;
 
@@ -274,6 +291,11 @@ class Bridge {
     }
   }
 
+  /**
+   * Set all lights on the bridge to a given state.
+   * 
+   * @param LightState $state
+   */
   public function setAllToState($state) {
     $lights = $this->getLights();
 
