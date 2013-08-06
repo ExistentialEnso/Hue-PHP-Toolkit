@@ -9,8 +9,11 @@ Toolkit to make working with the Philips Hue light system easier in PHP, featuri
 with a focus on code readability.
 
 To dive in, all you need to do is pass the the bridges IP address and an admin username to the constructor for Bridge.
+If you have not setup a user account with your bridge, refer to the "Getting Started" part of Philips' API guide.
 
+```
    $bridge = new \hue\models\Bridge("192.168.1.99", "admin");
+```
 
 Which allows you to easily manipulate your lights via PHP. For instance, you can turn off all of your lights with just
 one simple line:
