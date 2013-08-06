@@ -15,6 +15,8 @@ class Light {
   protected $id;
 
   /**
+   * The display name for the light.
+   * 
    * @var string
    */
   protected $name;
@@ -25,21 +27,29 @@ class Light {
   protected $type;
 
   /**
+   * The current state of the light.
+   * 
    * @var LightState
    */
   protected $state;
 
   /**
+   * The model of lightbulb.
+   * 
    * @var string
    */
   protected $model_id;
 
   /**
+   * The currently installed software on the bulb.
+   * 
    * @var string
    */
   protected $software_version;
 
   /**
+   * The bridge this light is connected to.
+   * 
    * @var Bridge
    */
   protected $bridge;
@@ -87,10 +97,14 @@ class Light {
   }
 
   /**
+   * Updates the state of the light. Will push to the bridge unless optional parameter set.
+   * 
    * @param \hue\models\LightState $state
    */
-  public function setState($state) {
+  public function setState($state, $skip_push=false) {
     $this->state = $state;
+    
+    if($skip_push) return;
 
     $data = array("on"=>$state->getIsOn(), "bri"=>$state->getBrightness(), "hue"=>$state->getHue(), "sat"=>$state->getSaturation(), "ct"=>$state->getColorTemperature(),
       "alert"=>$state->getAlert(), "effect"=>$state->getEffect(), "transitiontime"=>$state->getTransitionTime());
