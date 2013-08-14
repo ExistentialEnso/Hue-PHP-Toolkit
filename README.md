@@ -29,8 +29,8 @@ Or you can turn them all on to basic white at full brightness using the default 
    $bridge->setAllToState($state);
 ```
 
-States using our toolkit can even be setup by passing a color name! (**Note**: grays and cyans are not well supported
-by Hue -- even in the official app.)
+States using our toolkit can even be setup by passing a color name!
+( **Note**: grays and cyans are not well supported by Hue -- even in the official app.)
 
 ```
    $state->setNamedColor("dark red"); // Red at low brightness
