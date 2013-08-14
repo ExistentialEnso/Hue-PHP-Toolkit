@@ -3,7 +3,7 @@ Hue PHP Toolkit
 
 * Author: Thorne Melcher (GitHub: ExistentialEnso)
 * License: LGPL v3 (more permissive commercial licensing available for a fee on request)
-* Version: 0.2
+* Version: 0.2.1
 
 Toolkit to make working with the Philips Hue light system easier in PHP, featuring a heavily object-oriented design
 with a focus on code readability.
@@ -44,9 +44,12 @@ Hexcodes too!
 
 ### Version History
 
+#### v0.2.1 (Released 8/14/13)
+* Added TEMP_ convenience constants to LightState to represent three common temps of consumer light bulbs, as well as the max/min supported by the API.
+* Added getColorTemperatureK() and setColorTemperatureK() as alternatives for those who want to work in Kelvin instead of mired
+* Fixed some minor bugs.
+
 #### v0.2 (Released 8/14/13)
 * Added ->setHexCode() to LightState which approximates a light color from an HTML/CSS hex code (e.g. #FF0000)
 * Added ->setNamedColor() to LightState which sets the lights to any of the standard 141 web named colors (some work better than others)
 * Fixed some minor bugs.
-* Added more code documentation.
-* Laid some more groundwork in the Group model.

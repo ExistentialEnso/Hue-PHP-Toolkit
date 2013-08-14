@@ -30,7 +30,7 @@ class LightState {
    *
    * @var int
    */
-  protected $brightness = 0;
+  protected $brightness = 255;
 
   /**
    * The hue of the light.
@@ -98,6 +98,31 @@ class LightState {
    * @var int
    */
   protected $transition_time;
+
+  /**
+   * 2000K - Warmest temp value supported by API.
+   */
+  const TEMP_WARMEST = 500;
+
+  /**
+   * 2700K - Equivalent to a "warm" consumer light bulb.
+   */
+  const TEMP_WARM = 370;
+
+  /**
+   * 3500K - Equivalent to a "neutral" consumer light bulb.
+   */
+  const TEMP_NEUTRAL = 285;
+
+  /**
+   * 4500K - Equivalent to a "cool" consumer light bulb.
+   */
+  const TEMP_COOL = 222;
+
+  /**
+   * 6500K - Coolest temp value supported by API.
+   */
+  const TEMP_COOLEST = 153;
 
   /*
    * Certain fields must be limited to certain values in the setters. If new, valid options are added to the API, they
@@ -349,6 +374,9 @@ class LightState {
   }
 
   /**
+   * Sets the color temperature in mired.
+   *
+   * @see http://en.wikipedia.org/wiki/Mired
    * @param int $color_temperature
    */
   public function setColorTemperature($color_temperature) {
@@ -356,10 +384,33 @@ class LightState {
   }
 
   /**
+   * Alternate version of setColorTemperature() that takes Kelvin as units instead of mired.
+   *
+   * @see http://en.wikipedia.org/wiki/Kelvin#Colour_temperature
+   * @param int $color_temperature
+   */
+  public function setColorTemperatureK($color_temperature) {
+    $this->color_temperature = (int) (1000000/$color_temperature);
+  }
+
+  /**
+   * Gets the color temperature in mireds.
+   *
+   * @see http://en.wikipedia.org/wiki/Mired
    * @return int
    */
   public function getColorTemperature() {
     return $this->color_temperature;
+  }
+
+  /**
+   * Alternate version of getColorTemperature() that returns Kelvin as units instead of mired.
+   *
+   * @see http://en.wikipedia.org/wiki/Kelvin#Colour_temperature
+   * @return float
+   */
+  public function getColorTemperatureK() {
+    return 1000000/$this->color_temperature;
   }
 
   /**
