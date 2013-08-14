@@ -22,20 +22,29 @@ one simple line:
   $bridge->setAllOff();
 ```
 
-Or you can turn them all on almost as easily setting up a basic state.
+Or you can turn them all on to basic white at full brightness using the default state:
 
 ```
    $state = new \hue\models\State();
-   $state->setIsOn(true);
-   $state->setBrightness(255); //maximum brightness
-   $state->setSaturation(0); //no color filtering
    $bridge->setAllToState($state);
 ```
 
-Version History
-=====================
-**v0.2**
-8/14/13
+States using our toolkit can even be setup by passing a color name! (**Note**: grays and cyans are not well supported
+by Hue -- even in the official app.)
+
+```
+   $state->setNamedColor("dark red"); // Red at low brightness
+```
+
+Hexcodes too!
+
+```
+    $ state->setHexCode("#550000"); // Also red at low brightness
+```
+
+### Version History
+
+#### v0.2 (Released 8/14/13)
 * Added ->setHexCode() to LightState which approximates a light color from an HTML/CSS hex code (e.g. #FF0000)
 * Added ->setNamedColor() to LightState which sets the lights to any of the standard 141 web named colors (some work better than others)
 * Fixed some minor bugs.

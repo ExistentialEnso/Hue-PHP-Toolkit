@@ -22,7 +22,7 @@ class LightState {
    *
    * @var bool
    */
-  protected $is_on;
+  protected $is_on = true;
 
   /**
    * The brightness of the light.
@@ -30,7 +30,7 @@ class LightState {
    *
    * @var int
    */
-  protected $brightness;
+  protected $brightness = 0;
 
   /**
    * The hue of the light.
@@ -45,7 +45,7 @@ class LightState {
    *
    * @var int
    */
-  protected $saturation;
+  protected $saturation = 0;
 
   /**
    * The light's X position in CIE color space.
@@ -90,7 +90,7 @@ class LightState {
    *
    * @var string
    */
-  protected $color_mode;
+  protected $color_mode = "hs";
 
   /**
    * How long it should take to change to this state.
