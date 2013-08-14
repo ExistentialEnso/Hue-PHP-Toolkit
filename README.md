@@ -34,8 +34,7 @@ Or you can turn them all on almost as easily setting up a basic state.
 
 Version History
 =====================
-**v0.2**
-8/14/13
+**v0.2** (Released 8/14/13)
 * Added ->setHexCode() to LightState which approximates a light color from an HTML/CSS hex code (e.g. #FF0000)
 * Added ->setNamedColor() to LightState which sets the lights to any of the standard 141 web named colors (some work better than others)
 * Fixed some minor bugs.
