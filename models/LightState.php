@@ -374,7 +374,8 @@ class LightState {
   }
 
   /**
-   * Sets the color temperature in mired.
+   * Sets the color temperature in mired. See the "TEMP_" class constants for some easier-to-remember and useful
+   * temperatures for use with this method.
    *
    * @see http://en.wikipedia.org/wiki/Mired
    * @param int $color_temperature
