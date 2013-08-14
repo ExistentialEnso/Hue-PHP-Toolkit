@@ -459,16 +459,25 @@ class LightState {
   }
 
   /**
-   * Sets the saturation value for the light. Must be either an integer from 0-255 or a float between 0-1.
+   * Sets the saturation value for the light. Must be either an integer from 0-255.
    *
-   * @param mixed $saturation
+   * @param int $saturation
    */
   public function setSaturation($saturation) {
-    if(is_float($saturation)) $saturation = ($saturation * 255);
-
     if($saturation < 0 || $saturation > 255) return;
 
     $this->saturation = $saturation;
+  }
+
+  /**
+   * Alternative version of setSaturation() that takes a float from 0-1 instead.
+   *
+   * @param $saturation
+   */
+  public function setSaturationF($saturation) {
+    $saturation = ($saturation * 255);
+
+    return $this->setSaturation($saturation);
   }
 
   /**
@@ -581,9 +590,9 @@ class LightState {
     }
 
     // Determine the conversion value for our delta value
-    if($base < 2) $scaling = 25500; // Red-dominant colors occupy 38.910505836% of Hue's color space
-    elseif($base < 4) $scaling = 21420; // Green-dominant colors occupy 32.684824902% of Hue's color space
-    else $scaling = 18615; // Blue-dominant colors occupy 28.40466926% of Hue's color space
+    if($base < 2) $scaling = 25500; // red to green occupies 38.910505836% of Hue's color space
+    elseif($base < 4) $scaling = 21420; // green to blue occupies occupy 32.684824902% of Hue's color space
+    else $scaling = 18615; // blue to red occupies 28.40466926% of Hue's color space
 
     // Determine our appropriately-scaled hue value
     $this->hue = (int) ($base + ($delta * $scaling));

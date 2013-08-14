@@ -239,6 +239,7 @@ class Bridge {
     $light->setName($data->name);
     $light->setModelId($data->modelid);
     $light->setSoftwareVersion($data->swversion);
+    $light->setType($data->type);
 
     $sdata = $data->state;
     $state = new LightState();

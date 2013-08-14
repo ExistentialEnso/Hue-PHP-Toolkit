@@ -79,6 +79,8 @@ class Light {
   }
 
   /**
+   * Gets the model ID for this light. "LCT001" is a standard Hue bulb.
+   *
    * @return string
    */
   public function getModelId() {
@@ -122,12 +124,13 @@ class Light {
 
     $data = json_encode($data);
 
+    // PUT the state into the bulb via the bridge
     $ch = curl_init("http://" . $this->getBridge()->getIpAddress() . "/api/" . $this->getBridge()->getDefaultUser()->getUsername() . "/lights/" . $this->getId() . "/state");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
-    $response = curl_exec($ch);
+    curl_exec($ch);
   }
 
   /**
@@ -145,6 +148,8 @@ class Light {
   }
 
   /**
+   * Gets a short description of the light type. "Extended color light" is the value for a standard Hue bulb.
+   *
    * @return string
    */
   public function getType() {
