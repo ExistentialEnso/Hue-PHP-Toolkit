@@ -1,7 +1,10 @@
 <?php
 /**
-* @author Thorne Melcher <tmelcher@portdusk.com>
-*/
+ * @author Thorne Melcher <tmelcher@portdusk.com>
+ * @package hue-php-toolkit
+ * @version 0.2
+ * @license LGPL v3
+ */
 
 namespace hue\models;
 
@@ -83,9 +86,13 @@ class Light {
   }
 
   /**
+   * Sets the name of this Light. Maxmimum 32 characters.
+   *
    * @param string $name
    */
   public function setName($name) {
+    if(strlen($name) > 32) $name = substr($name, 0, 32);
+
     $this->name = $name;
   }
 
@@ -107,7 +114,7 @@ class Light {
     if($skip_push) return;
 
     $data = array("on"=>$state->getIsOn(), "bri"=>$state->getBrightness(), "hue"=>$state->getHue(), "sat"=>$state->getSaturation(), "ct"=>$state->getColorTemperature(),
-      "alert"=>$state->getAlert(), "effect"=>$state->getEffect(), "transitiontime"=>$state->getTransitionTime());
+      "alert"=>$state->getAlert(), "effect"=>$state->getEffect(), "transitiontime"=>$state->getTransitionTime(), "colormode"=>$state->getColorMode());
 
     foreach($data as $key=>$value) {
       if(is_null($value)) unset($data[$key]);
@@ -121,8 +128,6 @@ class Light {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
     $response = curl_exec($ch);
-
-    //var_dump($response);
   }
 
   /**

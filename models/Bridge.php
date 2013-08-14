@@ -1,10 +1,18 @@
 <?php
 /**
-* @author Thorne Melcher <tmelcher@portdusk.com>
+ * @author Thorne Melcher <tmelcher@portdusk.com>
+ * @package hue-php-toolkit
+ * @version 0.2
+ * @license LGPL v3
 */
 
 namespace hue\models;
 
+/**
+ * Model class representing a Hue bridge.
+ *
+ * @package hue\models
+ */
 class Bridge {
   /**
    * The display name of the bridge.
@@ -242,6 +250,8 @@ class Bridge {
     $state->setEffect($sdata->effect);
     $state->setColorMode($sdata->colormode);
 
+    $light->setBridge($this);
+
     $light->setState($state);
 
     return $light;
@@ -275,6 +285,31 @@ class Bridge {
     }
 
     return $lights;
+  }
+
+  public function getGroups() {
+    $fully_populate = false; //Optional parameter coming soon
+
+    $url = "http://" . $this->getIpAddress() . "/api/" . $this->getDefaultUser()->getUsername() . "/groups";
+
+    $data = file_get_contents($url);
+    $data = json_decode($data);
+
+    $groups = array();
+    foreach($data as $id => $info) {
+      if($fully_populate) {
+        $groups[] = $this->getGroup($id);
+      } else {
+        $group = new Group();
+        $group->setId($id);
+        $group->setName($info->name);
+        $group->setBridge($this);
+
+        $groups[] = $group;
+      }
+    }
+
+    return $groups;
   }
 
   /**

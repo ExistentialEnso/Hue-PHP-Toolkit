@@ -3,7 +3,7 @@ Hue PHP Toolkit
 
 * Author: Thorne Melcher (GitHub: ExistentialEnso)
 * License: LGPL v3 (more permissive commercial licensing available for a fee on request)
-* Version: 0.1
+* Version: 0.2
 
 Toolkit to make working with the Philips Hue light system easier in PHP, featuring a heavily object-oriented design
 with a focus on code readability.
@@ -31,3 +31,13 @@ Or you can turn them all on almost as easily setting up a basic state.
    $state->setSaturation(0); //no color filtering
    $bridge->setAllToState($state);
 ```
+
+Version History
+=====================
+**v0.2**
+8/14/13
+* Added ->setHexCode() to LightState which approximates a light color from an HTML/CSS hex code (e.g. #FF0000)
+* Added ->setNamedColor() to LightState which sets the lights to any of the standard 141 web named colors (some work better than others)
+* Fixed some minor bugs.
+* Added more code documentation.
+* Laid some more groundwork in the Group model.
